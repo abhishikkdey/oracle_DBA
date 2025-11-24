@@ -54,6 +54,11 @@ User created.
 
 SQL> GRANT create session, create tablespace to SHAUSR1 with admin option ;
 
+SQL> REVOKE CREATE SESSION, create tablespace from SHAUSR;
+
+Revoke succeeded.
+
+
 Grant succeeded.
 SELECT  privilege FROM dba_sys_privs WHERE admin_option = 'YES';
 SQL> grant select, insert ON HR.EMPLOYEES TO SHAUSR;
