@@ -67,3 +67,8 @@ Grant succeeded.
 SQL> grant select, update on HR.EMPLOYEES TO SHAUSR;
 
 Grant succeeded.
+
+SQL> REVOKE SELECT ,INSERT ON HR.EMPLOYEES FROM SHAUSR;
+
+Revoke succeeded.
+
