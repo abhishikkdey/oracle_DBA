@@ -52,6 +52,13 @@ SQL> create user SHAUSR1 identified by SHAUSR1
 
 User created.
 
-SQL> GRANT create session, create tablespace to SHAUSR1;
+SQL> GRANT create session, create tablespace to SHAUSR1 with admin option ;
+
+Grant succeeded.
+SELECT  privilege FROM dba_sys_privs WHERE admin_option = 'YES';
+SQL> grant select, insert ON HR.EMPLOYEES TO SHAUSR;
+
+Grant succeeded.
+SQL> grant select, update on HR.EMPLOYEES TO SHAUSR;
 
 Grant succeeded.
