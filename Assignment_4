@@ -1,1 +1,27 @@
+LSNRCTL> start listener_4
+Starting /u01/app/oracle/product/19.0.0/dbhome_1/bin/tnslsnr: please wait...
+
+TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+System parameter file is /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Log messages written to /u01/app/oracle/diag/tnslsnr/localhost/listener_4/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.47.41)(PORT=1721)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.47.41)(PORT=1721)))
+STATUS of the LISTENER
+------------------------
+Alias                     listener_4
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                25-NOV-2025 22:48:49
+Uptime                    0 days 0 hr. 0 min. 1 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/localhost/listener_4/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.47.41)(PORT=1721)))
+Services Summary...
+Service "ORCL" has 1 instance(s).
+  Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
 
