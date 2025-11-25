@@ -107,3 +107,69 @@ SID_LIST_LISTENER_1 =
     )
   )
 
+LSNRCTL> status listener_4
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.47.41)(PORT=1721)))
+STATUS of the LISTENER
+------------------------
+Alias                     listener_4
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                25-NOV-2025 22:48:49
+Uptime                    0 days 0 hr. 27 min. 41 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/localhost/listener_4/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.47.41)(PORT=1721)))
+Services Summary...
+Service "ORCL" has 1 instance(s).
+  Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+
+[oracle@localhost ~]$ lsnrctl services listener_4;
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 25-NOV-2025 23:19:20
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.47.41)(PORT=1721)))
+Services Summary...
+Service "ORCL" has 1 instance(s).
+  Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+    Handler(s):
+      "DEDICATED" established:0 refused:0
+         LOCAL SERVER
+The command completed successfully
+[oracle@localhost ~]$ lsnrctl reload listener_4;
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 25-NOV-2025 23:22:51
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.47.41)(PORT=1721)))
+The command completed successfully
+[oracle@localhost ~]$ lsnrctl status listener_4
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 25-NOV-2025 23:27:33
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.47.41)(PORT=1721)))
+STATUS of the LISTENER
+------------------------
+Alias                     listener_4
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                25-NOV-2025 22:48:49
+Uptime                    0 days 0 hr. 38 min. 45 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/localhost/listener_4/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.47.41)(PORT=1721)))
+Services Summary...
+Service "ORCL" has 1 instance(s).
+  Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
