@@ -58,5 +58,27 @@ Automatic archival	       Disabled
 Archive destination	       USE_DB_RECOVERY_FILE_DEST
 Oldest online log sequence     34
 Current log sequence	       36
+SQL> shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> 
+[oracle@localhost ORCL]$ cp *.dbf /u02/cold_bkp
+[oracle@localhost ORCL]$ cd /u02/cold_bkp
+[oracle@localhost cold_bkp]$ 
+[oracle@localhost cold_bkp]$ ls -ltr
+total 2081996
+-rw-r-----. 1 oracle oinstall 104865792 Nov 27 22:37 abhishek_01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 27 22:37 abhishek01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 27 22:37 abhishek02.dbf
+-rw-r-----. 1 oracle oinstall 639639552 Nov 27 22:39 sysaux01.dbf
+-rw-r-----. 1 oracle oinstall 954212352 Nov 27 22:41 system01.dbf
+-rw-r-----. 1 oracle oinstall  33562624 Nov 27 22:41 temp01.dbf
+-rw-r-----. 1 oracle oinstall 314580992 Nov 27 22:42 undotbs01.dbf
+-rw-r-----. 1 oracle oinstall   5251072 Nov 27 22:42 users01.dbf
+[oracle@localhost cold_bkp]$ 
+cp *.log /u02/cold_bkp
+cp control01.ctl /u02/cold_bkp
+cp control02.ctl /u02/cold_bkp
 
 
