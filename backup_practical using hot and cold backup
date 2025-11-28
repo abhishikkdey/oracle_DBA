@@ -157,3 +157,54 @@ rw-r-----. 1 oracle oinstall 104865792 Nov 28 21:13 abhishek_01.dbf
 [oracle@localhost ORCL]$ cp *.log /u02/hot_bkp
 [oracle@localhost ORCL]$ cp control01.ctl /u02/hot_bkp
 [oracle@localhost ORCL]$ cp control02.ctl /u02/hot_bkp
+[oracle@localhost ORCL]$ cd archivelog/
+[oracle@localhost archivelog]$ cp -r 2025_11_28 /u02/hot_bkp
+SQL> !rman target /
+RMAN> backup database plus archivelog;
+
+[oracle@localhost archivelog]$ ll
+oracle@localhost dbs]$ rm initorcl.ora
+[oracle@localhost dbs]$ rm spfileorcl.ora
+SQL> startup;
+ORA-01078: failure in processing system parameters
+LRM-00109: could not open parameter file '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/initorcl.ora'
+RMAN> restore spfile from'/u01/app/oracle/fast_recovery_area/ORCL/autobackup/2025_11_28/o1_mf_s_1218407497_nlmocqkb_.bkp';
+RMAN> startup nomount;
+
+connected to target database (not started)
+Oracle instance started
+
+Total System Global Area    1174404432 bytes
+
+Fixed Size                     8895824 bytes
+Variable Size                771751936 bytes
+Database Buffers             385875968 bytes
+Redo Buffers                   7880704 bytes
+[oracle@localhost ORCL]$ rm control01.ctl
+[oracle@localhost ORCL]$ rm control02.ctl
+MAN> alter database mount;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of sql statement command at 11/28/2025 23:10:30
+ORA-00205: error in identifying control file, check alert log for more info
+
+RMAN> 
+RMAN> restore controlfile from '/u01/app/oracle/fast_recovery_area/ORCL/autobackup/2025_11_28/o1_mf_s_1218407497_nlmocqkb_.bkp';
+
+Starting restore at 28-NOV-25
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=36 device type=DISK
+
+channel ORA_DISK_1: restoring control file
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:07
+output file name=/u01/app/oracle/oradata/ORCL/control01.ctl
+output file name=/u01/app/oracle/fast_recovery_area/ORCL/control02.ctl
+output file name=/u02/control03.ctl
+Finished restore at 28-NOV-25
+RMAN> alter database mount;
+
+
+
+
