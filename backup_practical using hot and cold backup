@@ -80,5 +80,80 @@ total 2081996
 cp *.log /u02/cold_bkp
 cp control01.ctl /u02/cold_bkp
 cp control02.ctl /u02/cold_bkp
+[oracle@localhost cold_bkp]$ cd /u01/app/oracle/product/19.0.0/dbhome_1/dbs
+[oracle@localhost dbs]$ ll
+total 20780
+drwxr-xr-x. 2 oracle oinstall        6 Nov 17 22:17 -
+-rwxrwxr-x. 1 oracle oinstall     1049 Nov 19 09:43 createdbabhi.sql
+-rw-rw----. 1 oracle oinstall     1544 Nov 19 09:49 hc_abhi.dat
+-rw-rw----. 1 oracle oinstall     1544 Nov 28 19:18 hc_orcl.dat
+-rw-rw----. 1 oracle oinstall     1544 Nov 21 20:53 hc_prod1.dat
+-rw-rw----. 1 oracle oinstall     1544 Sep 22 11:56 hc_prod.dat
+-rw-r--r--. 1 oracle oinstall      543 Nov 19 07:53 initabhi.ora
+-rwxrwxr-x. 1 oracle oinstall     3079 May 14  2015 init.ora
+-rw-r--r--. 1 oracle oinstall     1094 Oct 15 23:51 initorcl.ora
+-rw-r-----. 1 oracle oinstall       24 Nov 19 09:43 lkABHI
+-rw-r-----. 1 oracle oinstall       24 Sep 22 11:59 lkORCL
+-rw-r-----. 1 oracle oinstall       24 Oct 28 12:36 lkPROD1
+-rw-r-----. 1 oracle oinstall     6144 Nov  3 21:16 oraad1
+-rw-r-----. 1 oracle oinstall     6144 Nov 19 10:39 orapwabhi
+-rw-r-----. 1 oracle oinstall     2048 Sep 22 12:04 orapworcl
+-rw-r-----. 1 oracle oinstall     2048 Oct 28 12:42 orapwprod1
+-rw-r-----. 1 oracle oinstall 10600448 Nov 26 22:51 snapcf_orcl.f
+-rw-r-----. 1 oracle oinstall 10600448 Nov  5 22:29 snapcf_prod1.f
+-rw-r-----. 1 oracle oinstall     3584 Nov 28 19:18 spfileorcl.ora
+-rw-r-----. 1 oracle oinstall     3584 Nov 21 22:20 spfileprod1.ora
+[oracle@localhost dbs]$ cp spfileprod1.ora /u02/cold_bkp
+[oracle@localhost ~]$ cd /u02/cold_bkp
+[oracle@localhost cold_bkp]$ ll
+total 2717116
+-rw-r-----. 1 oracle oinstall 104865792 Nov 27 22:37 abhishek_01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 27 22:37 abhishek01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 27 22:37 abhishek02.dbf
+-rw-r-----. 1 oracle oinstall  10600448 Nov 27 23:10 control01.ctl
+-rw-r-----. 1 oracle oinstall  10600448 Nov 27 23:15 control02.ctl
+-rw-r-----. 1 oracle oinstall 209715712 Nov 27 23:06 redo01.log
+-rw-r-----. 1 oracle oinstall 209715712 Nov 27 23:06 redo02.log
+-rw-r-----. 1 oracle oinstall 209715712 Nov 27 23:06 redo03.log
+-rw-r-----. 1 oracle oinstall      3584 Nov 28 19:44 spfileprod1.ora
+-rw-r-----. 1 oracle oinstall 639639552 Nov 27 22:39 sysaux01.dbf
+-rw-r-----. 1 oracle oinstall 954212352 Nov 27 22:41 system01.dbf
+-rw-r-----. 1 oracle oinstall  33562624 Nov 27 22:41 temp01.dbf
+-rw-r-----. 1 oracle oinstall 314580992 Nov 27 22:42 undotbs01.dbf
+-rw-r-----. 1 oracle oinstall   5251072 Nov 27 22:42 users01.dbf
+hot backup
+SQL> startup mount;
+ORACLE instance started.
 
+Total System Global Area 1174404432 bytes
+Fixed Size		    8895824 bytes
+Variable Size		  771751936 bytes
+Database Buffers	  385875968 bytes
+Redo Buffers		    7880704 bytes
+Database mounted.
+SQL> alter database archivelog;
 
+Database altered.
+
+SQL> alter database open;
+
+Databas
+
+cd /u01/app/oracle/oradata/ORCL
+ll
+rw-r-----. 1 oracle oinstall 104865792 Nov 28 21:13 abhishek_01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 28 21:13 abhishek01.dbf
+-rw-r-----. 1 oracle oinstall  52436992 Nov 28 21:13 abhishek02.dbf
+-rw-r-----. 1 oracle oinstall  10600448 Nov 28 21:20 control01.ctl
+-rw-r-----. 1 oracle oinstall 209715712 Nov 28 21:13 redo01.log
+-rw-r-----. 1 oracle oinstall 209715712 Nov 28 21:13 redo02.log
+-rw-r-----. 1 oracle oinstall 209715712 Nov 28 21:19 redo03.log
+-rw-r-----. 1 oracle oinstall 639639552 Nov 28 21:19 sysaux01.dbf
+-rw-r-----. 1 oracle oinstall 954212352 Nov 28 21:19 system01.dbf
+-rw-r-----. 1 oracle oinstall  33562624 Nov 27 22:00 temp01.dbf
+-rw-r-----. 1 oracle oinstall 314580992 Nov 28 21:19 undotbs01.dbf
+-rw-r-----. 1 oracle oinstall   5251072 Nov 28 21:13 users01.dbf
+[oracle@localhost ORCL]$ cp *.dbf /u02/hot_bkp
+[oracle@localhost ORCL]$ cp *.log /u02/hot_bkp
+[oracle@localhost ORCL]$ cp control01.ctl /u02/hot_bkp
+[oracle@localhost ORCL]$ cp control02.ctl /u02/hot_bkp
