@@ -1,0 +1,24 @@
+RMAN> backup incremental level 0 database;
+
+Starting backup at 03-DEC-25
+using target database control file instead of recovery catalog
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=68 device type=DISK
+channel ORA_DISK_1: starting incremental level 0 datafile backup set
+channel ORA_DISK_1: specifying datafile(s) in backup set
+input datafile file number=00001 name=/u01/app/oracle/oradata/PROD1/system01.dbf
+input datafile file number=00003 name=/u01/app/oracle/oradata/PROD1/sysaux01.dbf
+input datafile file number=00004 name=/u01/app/oracle/oradata/PROD1/undotbs01.dbf
+input datafile file number=00005 name=/u01/app/oracle/oradata/PROD1/abhishek01.dbf
+input datafile file number=00007 name=/u01/app/oracle/oradata/PROD1/users01.dbf
+channel ORA_DISK_1: starting piece 1 at 03-DEC-25
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03009: failure of backup command on ORA_DISK_1 channel at 12/03/2025 22:37:12
+ORA-19502: write error on file "/u01/app/oracle/fast_recovery_area/PROD1/backupset/2025_12_03/o1_mf_nnnd0_TAG20251203T223158_nm0v8mfw_.bkp", block number 46720 (block size=8192)
+ORA-27072: File I/O error
+Linux-x86_64 Error: 28: No space left on device
+Additional information: 4
+Additional information: 46720
+Additional information: 4294967295
