@@ -22,3 +22,4 @@ Linux-x86_64 Error: 28: No space left on device
 Additional information: 4
 Additional information: 46720
 Additional information: 4294967295
+RMAN> backup incremental level 1 database;
