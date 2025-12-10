@@ -1,0 +1,219 @@
+SQL> !netmgr
+
+SQL> 
+SQL> lsnrctl
+SP2-0042: unknown command "lsnrctl" - rest of line ignored.
+SQL> !lsnrctl
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 10-DEC-2025 22:36:47
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+Welcome to LSNRCTL, type "help" for information.
+
+LSNRCTL> exit
+
+SQL> !
+[oracle@localhost ~]$ lsnrctl start listener_5
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 10-DEC-2025 22:37:32
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+Starting /u01/app/oracle/product/19.0.0/dbhome_1/bin/tnslsnr: please wait...
+
+TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+System parameter file is /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Log messages written to /u01/app/oracle/diag/tnslsnr/localhost/listener_5/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.41)(PORT=1522)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.4.41)(PORT=1522)))
+STATUS of the LISTENER
+------------------------
+Alias                     listener_5
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                10-DEC-2025 22:37:33
+Uptime                    0 days 0 hr. 0 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/localhost/listener_5/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.41)(PORT=1522)))
+Services Summary...
+Service "ORCL" has 1 instance(s).
+  Instance "ORCL", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+[oracle@localhost ~]$ cd /u01/app/oracle/product/19.0.0/dbhome_1/dbs
+[oracle@localhost dbs]$ ll
+total 10396
+drwxr-xr-x. 2 oracle oinstall        6 Nov 17 22:17 -
+-rwxrwxr-x. 1 oracle oinstall     1049 Nov 19 09:43 createdbabhi.sql
+-rw-rw----. 1 oracle oinstall     1544 Dec  9 09:53 hc_abhi.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 22:23 hc_orcl.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 08:03 hc_prod1.dat
+-rw-rw----. 1 oracle oinstall     1544 Sep 22 11:56 hc_prod.dat
+-rwxrwxr-x. 1 oracle oinstall     3079 May 14  2015 init.ora
+-rw-r-----. 1 oracle oinstall       24 Sep 22 11:59 lkORCL
+-rw-r-----. 1 oracle oinstall     6144 Nov  3 21:16 oraad1
+-rw-r-----. 1 oracle oinstall     2048 Sep 22 12:04 orapworcl
+-rw-r-----. 1 oracle oinstall 10600448 Nov 28 22:31 snapcf_orcl.f
+-rw-r-----. 1 oracle oinstall     3584 Dec 10 22:23 spfileorcl.ora
+[oracle@localhost dbs]$ cp orapworcl orapworclc
+[oracle@localhost dbs]$ ll
+total 10400
+drwxr-xr-x. 2 oracle oinstall        6 Nov 17 22:17 -
+-rwxrwxr-x. 1 oracle oinstall     1049 Nov 19 09:43 createdbabhi.sql
+-rw-rw----. 1 oracle oinstall     1544 Dec  9 09:53 hc_abhi.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 22:23 hc_orcl.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 08:03 hc_prod1.dat
+-rw-rw----. 1 oracle oinstall     1544 Sep 22 11:56 hc_prod.dat
+-rwxrwxr-x. 1 oracle oinstall     3079 May 14  2015 init.ora
+-rw-r-----. 1 oracle oinstall       24 Sep 22 11:59 lkORCL
+-rw-r-----. 1 oracle oinstall     6144 Nov  3 21:16 oraad1
+-rw-r-----. 1 oracle oinstall     2048 Sep 22 12:04 orapworcl
+-rw-r-----. 1 oracle oinstall     2048 Dec 10 22:53 orapworclc
+-rw-r-----. 1 oracle oinstall 10600448 Nov 28 22:31 snapcf_orcl.f
+-rw-r-----. 1 oracle oinstall     3584 Dec 10 22:23 spfileorcl.ora
+[oracle@localhost dbs]$ scp orapworclc oracle@192.168.122.1:/u01/app/oracle/product/19.0.0/dbhome_1/dbs
+The authenticity of host '192.168.122.1 (192.168.122.1)' can't be established.
+ECDSA key fingerprint is SHA256:C2GqjSKuJsXR6vo1p/cUf2i+6vEOfr36xa3ZEAEfPkQ.
+ECDSA key fingerprint is MD5:2c:3e:27:0a:3b:d9:9d:63:0b:c9:95:cf:bc:33:88:5e.
+Are you sure you want to continue connecting (yes/no)? y
+Please type 'yes' or 'no': yes
+Warning: Permanently added '192.168.122.1' (ECDSA) to the list of known hosts.
+oracle@192.168.122.1's password: 
+orapworclc                                                                                                          100% 2048   994.8KB/s   00:00    
+[oracle@localhost dbs]$ rman target /
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Dec 10 23:00:48 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: ORCL (DBID=1740275379, not open)
+
+RMAN> backup database plus archivelog;
+
+
+Starting backup at 10-DEC-25
+using target database control file instead of recovery catalog
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=23 device type=DISK
+channel ORA_DISK_1: starting archived log backup set
+channel ORA_DISK_1: specifying archived log(s) in backup set
+input archived log thread=1 sequence=13 RECID=9 STAMP=1215692067
+input archived log thread=1 sequence=14 RECID=10 STAMP=1215692372
+input archived log thread=1 sequence=15 RECID=11 STAMP=1215692525
+input archived log thread=1 sequence=16 RECID=12 STAMP=1215692789
+input archived log thread=1 sequence=17 RECID=13 STAMP=1215692951
+input archived log thread=1 sequence=18 RECID=14 STAMP=1215693179
+input archived log thread=1 sequence=19 RECID=15 STAMP=1215712482
+input archived log thread=1 sequence=20 RECID=16 STAMP=1216153248
+input archived log thread=1 sequence=21 RECID=17 STAMP=1216416557
+input archived log thread=1 sequence=22 RECID=18 STAMP=1217192877
+input archived log thread=1 sequence=23 RECID=19 STAMP=1217625520
+input archived log thread=1 sequence=24 RECID=20 STAMP=1217694377
+input archived log thread=1 sequence=25 RECID=21 STAMP=1217694789
+input archived log thread=1 sequence=26 RECID=22 STAMP=1217695213
+input archived log thread=1 sequence=27 RECID=23 STAMP=1217716560
+input archived log thread=1 sequence=28 RECID=24 STAMP=1217796387
+input archived log thread=1 sequence=29 RECID=25 STAMP=1218013553
+input archived log thread=1 sequence=30 RECID=26 STAMP=1218058765
+input archived log thread=1 sequence=31 RECID=27 STAMP=1218144901
+input archived log thread=1 sequence=32 RECID=28 STAMP=1218233219
+input archived log thread=1 sequence=33 RECID=29 STAMP=1218234658
+input archived log thread=1 sequence=34 RECID=30 STAMP=1218234783
+input archived log thread=1 sequence=35 RECID=31 STAMP=1218315733
+input archived log thread=1 sequence=36 RECID=32 STAMP=1218407040
+input archived log thread=1 sequence=37 RECID=33 STAMP=1218407486
+channel ORA_DISK_1: starting piece 1 at 10-DEC-25
+channel ORA_DISK_1: finished piece 1 at 10-DEC-25
+piece handle=/u01/app/oracle/fast_recovery_area/ORCL/backupset/2025_12_10/o1_mf_annnn_TAG20251210T230303_nmmcpjvh_.bkp tag=TAG20251210T230303 comment=NONE
+channel ORA_DISK_1: backup set complete, elapsed time: 00:00:25
+Finished backup at 10-DEC-25
+
+Starting backup at 10-DEC-25
+using channel ORA_DISK_1
+RMAN-06169: could not read file header for datafile 1 error reason 5
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of backup plus archivelog command at 12/10/2025 23:03:30
+RMAN-06056: could not access datafile 1
+
+RMAN> exit
+
+
+Recovery Manager complete.
+[oracle@localhost dbs]$ ll
+total 10400
+drwxr-xr-x. 2 oracle oinstall        6 Nov 17 22:17 -
+-rwxrwxr-x. 1 oracle oinstall     1049 Nov 19 09:43 createdbabhi.sql
+-rw-rw----. 1 oracle oinstall     1544 Dec  9 09:53 hc_abhi.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 22:23 hc_orcl.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 08:03 hc_prod1.dat
+-rw-rw----. 1 oracle oinstall     1544 Sep 22 11:56 hc_prod.dat
+-rwxrwxr-x. 1 oracle oinstall     3079 May 14  2015 init.ora
+-rw-r-----. 1 oracle oinstall       24 Sep 22 11:59 lkORCL
+-rw-r-----. 1 oracle oinstall     6144 Nov  3 21:16 oraad1
+-rw-r-----. 1 oracle oinstall     2048 Sep 22 12:04 orapworcl
+-rw-r-----. 1 oracle oinstall     2048 Dec 10 22:58 orapworclc
+-rw-r-----. 1 oracle oinstall 10600448 Nov 28 22:31 snapcf_orcl.f
+-rw-r-----. 1 oracle oinstall     3584 Dec 10 22:23 spfileorcl.ora
+[oracle@localhost dbs]$ vi initorclc.ora
+[oracle@localhost dbs]$ ll
+total 10404
+drwxr-xr-x. 2 oracle oinstall        6 Nov 17 22:17 -
+-rwxrwxr-x. 1 oracle oinstall     1049 Nov 19 09:43 createdbabhi.sql
+-rw-rw----. 1 oracle oinstall     1544 Dec  9 09:53 hc_abhi.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 22:23 hc_orcl.dat
+-rw-rw----. 1 oracle oinstall     1544 Dec 10 08:03 hc_prod1.dat
+-rw-rw----. 1 oracle oinstall     1544 Sep 22 11:56 hc_prod.dat
+-rwxrwxr-x. 1 oracle oinstall     3079 May 14  2015 init.ora
+-rw-r--r--. 1 oracle oinstall       18 Dec 10 23:17 initorclc.ora
+-rw-r-----. 1 oracle oinstall       24 Sep 22 11:59 lkORCL
+-rw-r-----. 1 oracle oinstall     6144 Nov  3 21:16 oraad1
+-rw-r-----. 1 oracle oinstall     2048 Sep 22 12:04 orapworcl
+-rw-r-----. 1 oracle oinstall     2048 Dec 10 22:58 orapworclc
+-rw-r-----. 1 oracle oinstall 10600448 Nov 28 22:31 snapcf_orcl.f
+-rw-r-----. 1 oracle oinstall     3584 Dec 10 22:23 spfileorcl.ora
+[oracle@localhost dbs]$ vi /etc/oratab
+[oracle@localhost dbs]$ cat /etc/oratab
+
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+orcl:/u01/app/oracle/product/19.0.0/dbhome_1:N
+
+orclc:/u01/app/oracle/product/19.0.0/dbhome_1:N
+
+[oracle@localhost dbs]$ . oraenv
+ORACLE_SID = [orcl] ? orclc
+The Oracle base remains unchanged with value /u01/app/oracle
+[oracle@localhost dbs]$ netmgr
+[oracle@localhost dbs]$ mkdir -p orclc:/u01/app/oracle/admin/orclc/adump
+[oracle@localhost dbs]$ mkdir -p /u01/app/oracle/admin/orclc/adump
+[oracle@localhost dbs]$ mkdir -p /u01/app/oracle/oradata/orclc
+[oracle@localhost dbs]$ mkdir -p /u01/app/oracle/fast_recovery_area/orclc
+
+
