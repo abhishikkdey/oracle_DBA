@@ -10,3 +10,34 @@ oracle@localhost ~]$ scp -r autobackup oracle@192.168.14.47:/u02/backup
 [oracle@localhost PROD]$ scp -r archivelog oracle@192.168.14.47:/u02/backup
 [oracle@localhost PROD]$ scp -r backupset oracle@192.168.14.47:/u02/backup
 [oracle@localhost PROD]$ scp -r control02.ctl oracle@192.168.14.47:/u02/backup
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL> !lsnrctl start listener_1
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.14.71)(PORT=1522)))
+STATUS of the LISTENER
+------------------------
+Alias                     listener_1
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                15-DEC-2025 22:49:18
+Uptime                    0 days 0 hr. 0 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19.0.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/localhost/listener_1/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.14.71)(PORT=1522)))
+Services Summary...
+Service "prod" has 1 instance(s).
+  Instance "prod", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+cd /u01/app/oracle/product/19.0.0/dbhome_1/dbs
+cp orapwprod orapwprodc
+scp orapwprodc oracle@192.168.14.47:/u01/app/oracle/product/19.0.0/dbhome_1/dbs
+oracle@192.168.14.47's password: 
+orapwprodc                       
+[oracle@localhost ~]$ cd /u01/app/oracle/product/19.0.0/dbhome_1/dbs
+[oracle@localhost dbs]$ ll
+total 8
+-rw-r--r--. 1 oracle oracle 3079 May 14  2015 init.ora
+-rw-r-----. 1 oracle oracle 2048 Dec 15 22:59 orapwprodc
+[oracle@localhost dbs]$ 
