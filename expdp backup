@@ -1,1 +1,30 @@
+SQL> create directory sha as '/u02/expdb_bkp'
+  2  ;
 
+Directory created.
+
+SQL> grant read, write on directory sha to scott;
+grant read, write on directory sha to scott
+                                      *
+ERROR at line 1:
+ORA-01917: user or role 'SCOTT' does not exist
+
+
+SQL> grant read, write on directory sha to system;
+
+Grant succeeded.
+
+SQL> !
+[oracle@localhost ~]$ expdb system/oracle directory=sha dumpfile=scott.emp logfile=scott.emp schemas=scott
+bash: expdb: command not found...
+[oracle@localhost ~]$ expdp system/oracle directory=sha dumpfile=scott.emp logfile=scott.emp schemas=scott
+
+Export: Release 19.0.0.0.0 - Production on Tue Dec 16 00:51:08 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+ORA-39002: invalid operation
+ORA-39070: Unable to open the log file.
+ORA-29283: invalid file operation: nonexistent file or path [29434]
