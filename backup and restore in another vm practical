@@ -1,1 +1,9 @@
-
+RMAN> backup database plus archive log;
+/u01/app/oracle/fast_recovery_area/PROD/backupset/2025_12_15/o1_mf_annnn_TAG20251215T180156_nmzzxwsd_.bkp tag=TAG20251215T180156
+/u01/app/oracle/fast_recovery_area/PROD/backupset/2025_12_15/o1_mf_nnndf_TAG20251215T180213_nmzzyg0v_.bkp ag=TAG20251215T180213 
+/u01/app/oracle/fast_recovery_area/PROD/45D404A4A3803B99E065000000000001/backupset/2025_12_15/o1_mf_nnndf_TAG20251215T180213_nn000hjh_.bkp tag=TAG20251215T180213 comment=NONE
+/u01/app/oracle/fast_recovery_area/PROD/45D382E5F93329B6E065000000000001/backupset/2025_12_15/o1_mf_nnndf_TAG20251215T180213_nn0019b8_.bkp tag=TAG20251215T180213 comment=NONE
+/u01/app/oracle/fast_recovery_area/PROD/backupset/2025_12_15/o1_mf_annnn_TAG20251215T180412_nn0024mh_.bkp tag=TAG20251215T180412 comment=NONE
+Starting Control File and SPFILE Autobackup at 15-DEC-25
+piece handle=/u01/app/oracle/fast_recovery_area/PROD/autobackup/2025_12_15/o1_mf_s_1219946655_nn0028tk_.bkp comment=NONE
+oracle@localhost ~]$ scp /u01/app/oracle/fast_recovery_area/PROD oracle@192.168.14.47:/u02/backup
