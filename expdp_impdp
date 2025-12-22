@@ -1,1 +1,61 @@
+SQL> create directory sha as '/u02/expdp_bkp';
 
+Directory created.
+
+SQL> grant read, write on directory sha to system;
+
+Grant succeeded.
+
+SQL> create user sha identified by sha default tablespace abhishek quota 1g on abhishek;
+[oracle@localhost ~]$ expdp system/oracle directory=sha dumpfile=full_prod_dmp full=y
+
+Starting "SYSTEM"."SYS_EXPORT_FULL_01":  system/******** directory=sha dumpfile=full_prod_dmp full=y 
+Processing object type DATABASE_EXPORT/EARLY_OPTIONS/VIEWS_AS_TABLES/TABLE_DATA
+Processing object type DATABASE_EXPORT/NORMAL_OPTIONS/TABLE_DATA
+Processing object type DATABASE_EXPORT/NORMAL_OPTIONS/VIEWS_AS_TABLES/TABLE_DATA
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER
+Processing object type DATABASE_EXPORT/PRE_INSTANCE_IMPCALLOUT/MARKER
+Processing object type DATABASE_EXPORT/TABLESPACE
+Processing object type DATABASE_EXPORT/PROFILE
+Processing object type DATABASE_EXPORT/RADM_FPTM
+Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT
+Dump file set for SYSTEM.SYS_EXPORT_FULL_01 is:
+  /u02/expdp_bkp/full_prod_dmp.dmp
+Job "SYSTEM"."SYS_EXPORT_FULL_01" successfully completed at Mon Dec 22 23:07:08 2025 elapsed 0 00:10:41
+scp full_prod_dmp.dmp oracle@192.168.171.47:/u02/impdp_bkp
+oracle@192.168.171.47's password: 
+full_prod_dmp.dmp                                                                                                   100% 3596KB   8.9MB/s   00:00    
+[oracle@localhost expdp_bkp]$ 
+------------------------------------------------------------------------
+in source machine
+SQL> create directory sha as'/u02/impdp_bkp';
+
+Directory created.
+
+SQL> grant read, write on directory sha to system;
+
+Grant succeeded.
+
+SQL> !impdp system/oracle directory=sha dumpfile=full_prod_dmp.dmp             
+
+Import: Release 19.0.0.0.0 - Production on Mon Dec 22 23:41:09 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+Warning: Oracle Data Pump operations are not typically needed when connected to the root or seed of a container database.
+
+Master table "SYSTEM"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
+Starting "SYSTEM"."SYS_IMPORT_FULL_01":  system/******** directory=sha dumpfile=full_prod_dmp.dmp 
+Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER
+Processing object type DATABASE_EXPORT/PRE_INSTANCE_IMPCALLOUT/MARKER
+Message from syslogd@localhost at Dec 22 23:46:06 ...
+ kernel:NMI watchdog: BUG: soft lockup - CPU#0 stuck for 25s! [ora_mz00_orcl:8134]
+Processing object type DATABASE_EXPORT/AUDIT_UNIFIED/AUDIT_POLICY_ENABLE
+Processing object type DATABASE_EXPORT/POST_SYSTEM_IMPCALLOUT/MARKER
+Job "SYSTEM"."SYS_IMPORT_FULL_01" completed with 11 error(s) at Mon Dec 22 23:46:34 2025 elapsed 0 00:05:14
