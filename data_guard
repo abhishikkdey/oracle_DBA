@@ -1,35 +1,57 @@
-ERROR at line 1:
-ORA-01034: ORACLE not available
-Process ID: 0
-Session ID: 0 Serial number: 0
-
-
-SQL> show parameter DG_BROKER_START
-ORA-01034: ORACLE not available
-Process ID: 0
-Session ID: 0 Serial number: 0
-
-
-SQL> select status,instance_name,database_role,protection_mode from v$database,v$instance;
-select status,instance_name,database_role,protection_mode from v$database,v$instance
-*
-ERROR at line 1:
-ORA-01034: ORACLE not available
-Process ID: 0
-Session ID: 0 Serial number: 0
-
-
-SQL> startup;
-ORACLE instance started.
-
 Total System Global Area 1509945616 bytes
 Fixed Size		    8896784 bytes
 Variable Size		 1275068416 bytes
 Database Buffers	  218103808 bytes
 Redo Buffers		    7876608 bytes
 Database mounted.
-ORA-03113: end-of-file on communication channel
-Process ID: 16751
-Session ID: 237 Serial number: 34778
+SQL> select name,open_mode,database_role from v$database;
+
+NAME	  OPEN_MODE	       DATABASE_ROLE
+--------- -------------------- ----------------
+PROD	  MOUNTED	       PRIMARY
+
+SQL> SELECT log_mode FROM v$database;
+
+LOG_MODE
+------------
+ARCHIVELOG
+
+SQL>  select name,open_mode,database_role,protection_mode from v$database;
+
+NAME	  OPEN_MODE	       DATABASE_ROLE	PROTECTION_MODE
+--------- -------------------- ---------------- --------------------
+PROD	  MOUNTED	       PRIMARY		MAXIMUM PROTECTION
+SQL> ALTER DATABASE SET STANDBY DATABASE TO MAXIMIZE AVAILABILITY;
+
+Database altered.
+
+SQL> ALTER DATABASE OPEN;
+
+Database altered.
+
+SQL> select name,open_mode,database_role,protection_mode from v$database;
+
+NAME	  OPEN_MODE	       DATABASE_ROLE	PROTECTION_MODE
+--------- -------------------- ---------------- --------------------
+PROD	  READ WRITE	       PRIMARY		MAXIMUM AVAILABILITY
+SQL>  select thread#,max(sequence#) from v$archived_log group by thread#;
+
+   THREAD# MAX(SEQUENCE#)
+---------- --------------
+	 1	       24
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+standby side 
+select name,open_mode,database_role,protection_mode from v$database;
+NAME	  OPEN_MODE	       DATABASE_ROLE	PROTECTION_MODE
+--------- -------------------- ---------------- --------------------
+PROD	  READ ONLY	       PHYSICAL STANDBY MAXIMUM PERFORMANCE
+
+SQL>  select thread#,max(sequence#) from v$archived_log group by thread#;
+
+   THREAD# MAX(SEQUENCE#)
+---------- --------------
+	 1	       24
+
 
 
