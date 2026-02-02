@@ -69,3 +69,22 @@ oracle		     USER1		  02-FEB-26	150018 select * from scott.
 
 oracle		     USER1		  02-FEB-26	150018 select * from scott.
 							       emp
+-----------------------------------------------------------------------------------------------------------------------------
+SQL> select OS_USERNAME, USERNAME, TIMESTAMP, SESSIONID,  SQL_TEXT from dba_audit_trail;
+
+OS_USERNAME	     USERNAME		  TIMESTAMP  SESSIONID SQL_TEXT
+-------------------- -------------------- --------- ---------- --------------------
+oracle		     USER1		  02-FEB-26	150018 select * from scott.
+							       emp
+
+oracle		     USER1		  02-FEB-26	150018 select * from scott.
+							       emp
+
+oracle		     USER1		  02-FEB-26	150018 update scott.emp set
+								ename=queen where e
+							       mpno = 7839
+
+oracle		     USER1		  02-FEB-26	150018 update scott.emp set
+								ename='queen' where
+								empno=7839
+
