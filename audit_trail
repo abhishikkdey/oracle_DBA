@@ -28,3 +28,44 @@ NAME				     TYPE	 VALUE
 ------------------------------------ ----------- ------------------------------
 audit_trail			     string	 DB, EXTENDED
 
+SQL> audit table;
+
+Audit succeeded.
+
+SQL> audit select, update, insert, delete on scott.emp by access;
+
+SQL> create user user1 identified by user1;
+
+User created.
+SQL> grant create session to user1;
+
+Grant succeeded.
+grant select,insert,update,delete on scott.emp to user1;
+
+Grant succeeded.
+SQL> select OS_USERNAME, USERNAME, TIMESTAMP, SESSIONID,  SQL_TEXT from dba_audit_trail;
+[oracle@localhost ~]$ . oraenv
+ORACLE_SID = [oracle] ? orcl
+The Oracle base has been set to /u01/app/oracle
+[oracle@localhost ~]$ sqlplus user1/user1
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Mon Feb 2 20:31:53 2026
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> show user;
+USER is "USER1"
+SQL> select OS_USERNAME, USERNAME, TIMESTAMP, SESSIONID,  SQL_TEXT from dba_audit_trail;
+OS_USERNAME	     USERNAME		  TIMESTAMP  SESSIONID SQL_TEXT
+-------------------- -------------------- --------- ---------- --------------------
+oracle		     USER1		  02-FEB-26	150018 select * from scott.
+							       emp
+
+oracle		     USER1		  02-FEB-26	150018 select * from scott.
+							       emp
