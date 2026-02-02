@@ -1,1 +1,30 @@
+SQL> show parameter audit_trail;
+
+NAME				     TYPE	 VALUE
+------------------------------------ ----------- ------------------------------
+audit_trail			     string	 DB
+SQL> 
+
+SQL> show parameter audit;
+
+NAME				     TYPE	 VALUE
+------------------------------------ ----------- ------------------------------
+audit_file_dest 		     string	 /u01/app/oracle/admin/orcl/adu
+						 mp
+audit_sys_operations		     boolean	 TRUE
+audit_syslog_level		     string
+audit_trail			     string	 DB
+unified_audit_common_systemlog	     string
+unified_audit_sga_queue_size	     integer	 1048576
+unified_audit_systemlog 	     string
+SQL> 
+SQL> alter system set audit_trail=db, extended scope=spfile;
+
+System altered.
+
+SQL> show parameter audit_trail;  
+
+NAME				     TYPE	 VALUE
+------------------------------------ ----------- ------------------------------
+audit_trail			     string	 DB, EXTENDED
 
