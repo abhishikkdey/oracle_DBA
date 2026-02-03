@@ -88,3 +88,19 @@ oracle		     USER1		  02-FEB-26	150018 update scott.emp set
 								ename='queen' where
 								empno=7839
 
+SQL>   CREATE OR REPLACE TRIGGER ABC
+AFTER UPDATE OF SAL ON SCOTT.EMP
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+IF :OLD.SAL !=NEW.SAL THEN
+RAISE_APPLICATION_ERROR(-20202,'YOU CONNOT CHANGE THE SALARY OF EMP');
+END IF;
+/
+SQL> update scott.emp set sal=200 where empno=7369;
+update scott.emp set sal=200 where empno=7369
+             *
+ERROR at line 1:
+ORA-04098: trigger 'SYS.ABC' is invalid and failed re-validation
+
+
