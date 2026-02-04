@@ -1,1 +1,39 @@
+SQL> startup mount
+ORACLE instance started.
+
+Total System Global Area 1509945616 bytes
+Fixed Size		    8896784 bytes
+Variable Size		  922746880 bytes
+Database Buffers	  570425344 bytes
+Redo Buffers		    7876608 bytes
+Database mounted.
+SQL> alter database flashback on;
+
+Database altered.
+
+SQL> alter database open;
+
+Database altered.
+SQL> select flashback_on from v$database;
+
+FLASHBACK_ON
+------------------
+YES
+
+SQL> show parameter reco;
+
+NAME				     TYPE	 VALUE
+------------------------------------ ----------- ------------------------------
+control_file_record_keep_time	     integer	 7
+db_recovery_file_dest		     string	 /u01/app/oracle/fast_recovery_
+						 area
+db_recovery_file_dest_size	     big integer 8256M
+db_unrecoverable_scn_tracking	     boolean	 TRUE
+recovery_parallelism		     integer	 0
+remote_recovery_file_dest	     string
+[oracle@localhost ORCL]$ cd flashback
+[oracle@localhost flashback]$ ll
+total 409616
+-rw-rw----. 1 oracle oracle 209723392 Feb  4 21:31 o1_mf_nr6ot1j3_.flb
+-rw-rw----. 1 oracle oracle 209723392 Feb  4 19:57 o1_mf_nr6otcl5_.flb
 
