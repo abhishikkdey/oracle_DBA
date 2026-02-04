@@ -36,4 +36,15 @@ remote_recovery_file_dest	     string
 total 409616
 -rw-rw----. 1 oracle oracle 209723392 Feb  4 21:31 o1_mf_nr6ot1j3_.flb
 -rw-rw----. 1 oracle oracle 209723392 Feb  4 19:57 o1_mf_nr6otcl5_.flb
+USER is "SYS"
+SQL> drop table scott.emp;
+
+Table dropped.
+
+SQL> select * from scott.emp;
+select * from scott.emp
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
 
